@@ -20,23 +20,23 @@ def add_random():
     print(board)
     
 def push(inp):
-    for x in range(3):
-        if inp == "w":
+    for x in range(3): # Running the whole function 3 times to make sure all entries can be moved all the way from one side to another.
+        if inp == "w": # "w" means up.
             for i in range(1, 4):
                 for j in range(4):
-                    if board[i-1, j] == 0:
-                        board[i-1, j] = board[i, j]
-                        board[i, j] = 0
+                    if board[i-1, j] == 0: # Checking if the entry above is being used.
+                        board[i-1, j] = board[i, j] # Setting value above to value in entry [i, j].
+                        board[i, j] = 0 # Setting [i, j] to 0.
             continue
-        if inp == "s":
+        if inp == "s": # "s" means down.
             for i in range(2, -1, -1):
                 for j in range(4):
-                    if board[i+1, j] == 0:
-                        board[i+1, j] = board[i, j]
-                        board[i, j] = 0
+                    if board[i+1, j] == 0: # Checking if the entry below is being used.
+                        board[i+1, j] = board[i, j] # Setting value below to value in entry [i, j].
+                        board[i, j] = 0 # Setting [i, j] to 0.
             continue
 
-        if inp == "a":
+        if inp == "a": # "a" means left.
             for i in range(4):
                 for j in range(1, 4):
                     if board[i, j-1] == 0:
@@ -44,7 +44,7 @@ def push(inp):
                         board[i, j] = 0
             continue
 
-        if inp == "d":
+        if inp == "d": # "d" means right.
             for i in range(4):
                 for j in range(2, -1, -1):
                     if board[i, j+1] == 0:
@@ -52,6 +52,7 @@ def push(inp):
                         board[i, j] = 0
             continue
 
+# When two identical entries are next to each other, they are merged (Doubled) and the last one is deleted.
 def merge(inp):
     if inp == "w":
         for i in range(1, 4):
@@ -81,6 +82,7 @@ def merge(inp):
                     board[i, j+1] *= 2
                     board[i, j] = 0
 
+# These are the steps taken at each command.
 def move_up():
     push("w")
     merge("w")
@@ -105,12 +107,13 @@ def move_right():
     push("d")
     print(board)
 
+# Control center:
 def command_center():
     while True:
-        user_command = input("Press the command: ")
+        user_command = input("Press the command: ") # User input.
         if user_command == command_up:
             move_up()
-            add_random()
+            add_random() # After each move we add a value in a random entry.
         if user_command == command_down:
             move_down()
             add_random()
@@ -121,6 +124,7 @@ def command_center():
             move_right()
             add_random()
 
+# To start the game we need to add two random numbers and call the control center.
 user_command = input("Press space to start! ")
 if user_command == ' ':
     add_random()
