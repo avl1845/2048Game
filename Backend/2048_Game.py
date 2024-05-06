@@ -19,84 +19,90 @@ def add_random():
             continue
     print(board)
     
+def push(inp):
+    for x in range(3):
+        if inp == "w":
+            for i in range(1, 4):
+                for j in range(4):
+                    if board[i-1, j] == 0:
+                        board[i-1, j] = board[i, j]
+                        board[i, j] = 0
+            continue
+        if inp == "s":
+            for i in range(2, -1, -1):
+                for j in range(4):
+                    if board[i+1, j] == 0:
+                        board[i+1, j] = board[i, j]
+                        board[i, j] = 0
+            continue
+
+        if inp == "a":
+            for i in range(4):
+                for j in range(1, 4):
+                    if board[i, j-1] == 0:
+                        board[i, j-1] = board[i, j]
+                        board[i, j] = 0
+            continue
+
+        if inp == "d":
+            for i in range(4):
+                for j in range(2, -1, -1):
+                    if board[i, j+1] == 0:
+                        board[i, j+1] = board[i, j]
+                        board[i, j] = 0
+            continue
+
+def merge(inp):
+    if inp == "w":
+        for i in range(1, 4):
+            for j in range(4):        
+                if board[i-1, j] == board[i, j]:
+                    board[i-1, j] *= 2
+                    board[i, j] = 0
+
+    if inp == "s":
+        for i in range(2, -1, -1):
+            for j in range(4):        
+                if board[i+1, j] == board[i, j]:
+                    board[i+1, j] *= 2
+                    board[i, j] = 0
+    
+    if inp == "a":
+        for i in range(4):
+            for j in range(1, 4):        
+                if board[i, j-1] == board[i, j]:
+                    board[i, j-1] *= 2
+                    board[i, j] = 0
+
+    if inp == "d":
+        for i in range(4):
+            for j in range(2, -1, -1):        
+                if board[i, j+1] == board[i, j]:
+                    board[i, j+1] *= 2
+                    board[i, j] = 0
+
 def move_up():
-    for x in range(3):
-        for i in range(1, 4):
-            for j in range(4):
-                if board[i-1, j] == 0:
-                    board[i-1, j] = board[i, j]
-                    board[i, j] = 0
-    for i in range(1, 4):
-        for j in range(4):        
-            if board[i-1, j] == board[i, j]:
-                board[i-1, j] *= 2
-                board[i, j] = 0
-    for x in range(3):
-        for i in range(1, 4):
-            for j in range(4):
-                if board[i-1, j] == 0:
-                    board[i-1, j] = board[i, j]
-                    board[i, j] = 0
+    push("w")
+    merge("w")
+    push("w")
     print(board)
 
 def move_down():
-    for x in range(3):
-        for i in range(2, -1, -1):
-            for j in range(4):
-                if board[i+1, j] == 0:
-                    board[i+1, j] = board[i, j]
-                    board[i, j] = 0
-    for i in range(2, -1, -1):
-        for j in range(4):        
-            if board[i+1, j] == board[i, j]:
-                board[i+1, j] *= 2
-                board[i, j] = 0
-    for x in range(3):    
-        for i in range(2, -1, -1):
-            for j in range(4):
-                if board[i+1, j] == 0:
-                    board[i+1, j] = board[i, j]
-                    board[i, j] = 0
+    push("s")
+    merge("s")
+    push("s")
     print(board)
 
 def move_left():
-    for x in range(3):
-        for i in range(4):
-            for j in range(1, 4):
-                if board[i, j-1] == 0:
-                    board[i, j-1] = board[i, j]
-                    board[i, j] = 0
-    for i in range(4):
-        for j in range(1, 4):        
-            if board[i, j-1] == board[i, j]:
-                board[i, j-1] *= 2
-                board[i, j] = 0
-    for x in range(3):    
-        for i in range(4):
-            for j in range(1, 4):
-                if board[i, j-1] == 0:
-                    board[i, j-1] = board[i, j]
-                    board[i, j] = 0
+    push("a")
+    merge("a")
+    push("a")
     print(board)
 
 def move_right():
-    for x in range(3):
-        for i in range(4):
-            for j in range(2, -1, -1):
-                if board[i, j+1] == 0:
-                    board[i, j+1] = board[i, j]
-                    board[i, j] = 0
-    for i in range(4):
-        for j in range(2, -1, -1):        
-            if board[i, j+1] == board[i, j]:
-                board[i, j+1] *= 2
-                board[i, j] = 0
-    for x in range(3):    
-        for i in range(4):
-            for j in range(2, -1, -1):
-                if board[i, j+1] == 0:
-                    board[i, j+1] = board[i, j]
-                    board[i, j] = 0
+    push("d")
+    merge("d")
+    push("d")
     print(board)
 
 def command_center():
@@ -114,7 +120,6 @@ def command_center():
         if user_command == command_right:
             move_right()
             add_random()
-
 
 user_command = input("Press space to start! ")
 if user_command == ' ':
