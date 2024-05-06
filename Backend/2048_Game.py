@@ -119,6 +119,7 @@ def command_center():
 user_command = input("Press space to start! ")
 if user_command == ' ':
     add_random()
+    add_random()
     command_center()
 
 
