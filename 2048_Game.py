@@ -3,20 +3,16 @@ import random
 
 board = (np.zeros(16)).reshape(4, 4)
 print(board)
-command_start = ' '
-command_up = 'w'
-command_down = 's'
-command_left = 'a'
-command_right = 'd'
-
-
+command_start = ' '; command_up = 'w'; command_down = 's'; command_left = 'a'; command_right = 'd'
+lst_of_twos = ([2] * 17); lst_of_fours = [4, 4, 4]
+lst_total = lst_of_twos; lst_total.extend(lst_of_fours)
 
 def add_random():
     while True:
         select_row = random.randint(0, 3)
         select_column = random.randint(0, 3)
         if board[select_row, select_column] == 0:
-            board[select_row, select_column] = 2
+            board[select_row, select_column] = random.choice(lst_total)
             break
         else:
             continue
